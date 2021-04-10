@@ -7,15 +7,20 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using DevCard_MVC.Models;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace DevCard_MVC.Controllers
 {
     public class HomeController : Controller
     {
 
-        public HomeController(ILogger<HomeController> logger)
+        private readonly List<Service> _services = new List<Service>()
         {
-        }
+            new Service(1, "نقره ای"),
+            new Service(2, "طلا ای"),
+            new Service(3, "پلاتین"),
+            new Service(4, "الماس"),
+        };
 
         public IActionResult Index()
         {
@@ -25,7 +30,10 @@ namespace DevCard_MVC.Controllers
         [HttpGet]
         public IActionResult Contact()
         {
-            var model = new Contact();
+            var model = new Contact()
+            {
+                Services = new SelectList(_services, "Id", "Name")
+            };
             return View(model);
         }
 
@@ -46,6 +54,9 @@ namespace DevCard_MVC.Controllers
         [HttpPost]
         public IActionResult Contact(Contact model)
         {
+            //-- fill services choices model --//
+            model.Services = new SelectList(_services, "Id", "Name");
+
             //-- validate in server side --//
             if (!ModelState.IsValid)
             {
@@ -53,8 +64,16 @@ namespace DevCard_MVC.Controllers
                 return View(model);
             }
 
+            //-- clear fields --//
+            ModelState.Clear();
+
+            //-- generate new Contact with services choices only --//
+            model = new Contact()
+            {
+                Services = new SelectList(_services, "Id", "Name")
+            };
             ViewBag.success = "اطلاعات وارد شده به درستی ثبت شد";
-            return View();
+            return View(model);
             
         }
 

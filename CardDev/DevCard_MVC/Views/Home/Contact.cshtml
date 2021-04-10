@@ -83,12 +83,8 @@
                     <span asp-validation-for="Email" class="text-danger"></span>
                 </div>
                 <div class="form-group col-12">
-                    <select class="custom-select" name="services" asp-for="Service">
+                    <select class="custom-select" asp-for="Service" asp-items="Model.Services">
                         <option selected>سرویس مورد نظر خود را انتخاب کنید...</option>
-                        <option value="basic">نقره ای</option>
-                        <option value="standard">طلایی</option>
-                        <option value="premium">پلاتین</option>
-                        <option value="not sure">الماس</option>
                     </select>
                 </div>
                 <div class="form-group col-12">

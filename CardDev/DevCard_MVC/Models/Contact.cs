@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace DevCard_MVC.Models
 {
@@ -17,7 +18,8 @@ namespace DevCard_MVC.Models
         [EmailAddress(ErrorMessage = "فرمت ناصحیح ایمیل")]
         public string Email { get; set; }
         public string Message { get; set; }
-        public string Service { get; set; }
+        public int Service { get; set; }
+        public SelectList Services { get; set; }
 
     }
 }
