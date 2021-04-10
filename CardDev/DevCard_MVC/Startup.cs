@@ -29,6 +29,8 @@ namespace DevCard_MVC
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+
+            /*
             //-- custom middleware --//
             app.UseCustomLogger();
 
@@ -118,12 +120,12 @@ namespace DevCard_MVC
                 var name = context.Items["name"];
                 await context.Response.WriteAsync("Run Executed Successfully");
             });
-
+            */
 
 
             #region Defualt Middleware
 
-            /*if (env.IsDevelopment())
+            if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
@@ -142,7 +144,7 @@ namespace DevCard_MVC
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
-            });*/
+            });
 
             #endregion
 
