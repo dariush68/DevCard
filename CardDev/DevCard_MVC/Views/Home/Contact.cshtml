@@ -57,6 +57,18 @@
 
 <section class="contact-section px-3 py-5 p-md-5">
     <div class="container">
+        @if (!string.IsNullOrWhiteSpace(ViewBag.errror))
+        {
+            <div class="alert-danger p-3">
+                @ViewBag.errror
+            </div>
+        }
+        @if (!string.IsNullOrWhiteSpace(ViewBag.success))
+        {
+            <div class="alert-success p-3">@ViewBag.success</div>
+        }
+    </div>
+    <div class="container">
         <form id="contact-form" class="contact-form col-lg-8 mx-lg-auto" method="post" asp-action="Contact">
             <h3 class="text-center mb-3">در دسترس باشید!</h3>
             <div class="form-row">
@@ -67,11 +79,11 @@
                 </div>
                 <div class="form-group col-md-6">
                     <label class="sr-only" asp-for="Email">ایمیل</label>
-                    <input type="email" class="form-control"  placeholder="ایمیل" asp-for="Email">
+                    <input type="email" class="form-control" placeholder="ایمیل" asp-for="Email">
                     <span asp-validation-for="Email" class="text-danger"></span>
                 </div>
                 <div class="form-group col-12">
-                    <select  class="custom-select" name="services" asp-for="Service">
+                    <select class="custom-select" name="services" asp-for="Service">
                         <option selected>سرویس مورد نظر خود را انتخاب کنید...</option>
                         <option value="basic">نقره ای</option>
                         <option value="standard">طلایی</option>

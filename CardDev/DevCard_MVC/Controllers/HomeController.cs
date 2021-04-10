@@ -36,11 +36,26 @@ namespace DevCard_MVC.Controllers
         //     return Json(Ok());
         // }
 
+        // [HttpPost]
+        // public JsonResult Contact(Contact form)
+        // {
+        //     Console.WriteLine(form.ToString());
+        //     return Json(Ok());
+        // }
+
         [HttpPost]
-        public JsonResult Contact(Contact form)
+        public IActionResult Contact(Contact model)
         {
-            Console.WriteLine(form.ToString());
-            return Json(Ok());
+            //-- validate in server side --//
+            if (!ModelState.IsValid)
+            {
+                ViewBag.error = "اطلاعات وارد شده صحیح نمی باشد";
+                return View(model);
+            }
+
+            ViewBag.success = "اطلاعات وارد شده به درستی ثبت شد";
+            return View();
+            
         }
 
 
